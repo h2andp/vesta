@@ -1,6 +1,8 @@
 package net.h2andp.core.domain
 
 import javax.persistence.*
+import javax.persistence.CascadeType.ALL
+import javax.persistence.FetchType.EAGER
 import javax.persistence.GenerationType.AUTO
 
 /**
@@ -45,21 +47,21 @@ data class Image (
          * Set of attached image attributes
          * extracted from this image during the indexing step.
          */
-        @OneToMany(mappedBy = "image", cascade = arrayOf(CascadeType.ALL), fetch = FetchType.EAGER)
+        @OneToMany( mappedBy = "image", cascade = arrayOf( ALL ), fetch = EAGER )
         var attributes: Set<ImageAttribute>,
 
         /**
          * Set of attached image attributes
          * extracted from this image during the indexing step.
          */
-        @OneToMany(mappedBy = "image", cascade = arrayOf(CascadeType.ALL), fetch = FetchType.EAGER)
+        @OneToMany( mappedBy = "image", cascade = arrayOf( ALL ), fetch = EAGER )
         var imageClassifications: Set<ImageClassification>,
 
         /**
          * Set of attached image attributes
          * extracted from this image during the indexing step.
          */
-        @OneToMany(mappedBy = "image", cascade = arrayOf(CascadeType.ALL), fetch = FetchType.EAGER)
+        @OneToMany( mappedBy = "image", cascade = arrayOf( ALL ), fetch = EAGER )
         var duplicates: Set<ImageDuplicate>
 
 )

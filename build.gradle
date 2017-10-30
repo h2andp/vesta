@@ -36,5 +36,6 @@ dependencies {
     compile "org.hibernate:hibernate-entitymanager"
     compile "org.postgresql:postgresql"
     compile "org.liquibase:liquibase-core"
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
 }
