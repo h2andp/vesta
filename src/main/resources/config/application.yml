@@ -1,0 +1,23 @@
+vesta:
+  indexing:
+    path: "file:///home/gzhebrakov/Pictures"
+    recursive: true
+  mq:
+    idxReqQName: "idxRequests"
+    idxRespQName: "idxResponses"
+
+spring:
+  application:
+    name: vesta
+  session:
+    store-type: none
+  datasource:
+    url: jdbc:postgresql://localhost:5432/homeenv
+    username: homeenv
+    password: homeenv
+
+liquibase:
+  user: homeenv
+  password: homeenv
+  url: jdbc:postgresql://localhost:5432/homeenv
+  change-log: classpath:db/changelog/changelog-master.xml
