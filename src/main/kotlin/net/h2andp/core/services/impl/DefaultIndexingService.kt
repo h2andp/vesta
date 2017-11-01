@@ -1,5 +1,10 @@
 package net.h2andp.core.services.impl
 
+import com.drew.metadata.Directory
+import com.drew.metadata.Metadata
+import com.drew.metadata.exif.GpsDirectory
+import com.drew.metadata.file.FileMetadataDirectory
+import com.drew.metadata.jpeg.JpegDirectory
 import com.google.common.hash.Hashing
 import com.google.common.io.Files
 import net.h2andp.core.domain.Image
@@ -9,6 +14,7 @@ import net.h2andp.core.repositories.ImageAttributeRepository
 import net.h2andp.core.repositories.ImageDuplicateRepository
 import net.h2andp.core.repositories.ImageRepository
 import net.h2andp.core.services.IndexingService
+import net.h2andp.core.util.ImageMetadataReader
 import org.apache.commons.io.FileUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -121,11 +127,23 @@ class DefaultIndexingService(
     private fun extractMetadata( file: File ): MutableSet<ImageAttribute> {
         val attributes = mutableSetOf<ImageAttribute>()
         try {
-
+            val metadata: Metadata? = ImageMetadataReader.readMetadata( file )
+            attributes.addAll( extractDirectoryAttributes( metadata!!, GpsDirectory::class.java ) )
+            attributes.addAll( extractDirectoryAttributes( metadata, FileMetadataDirectory::class.java ) )
+            attributes.addAll( extractDirectoryAttributes( metadata, JpegDirectory::class.java ) )
 
         } catch ( e: Throwable ){
             //TODO add logging
         }
+        return attributes
+    }
+
+    private fun extractDirectoryAttributes( metadata: Metadata, dirCls: Class<out Directory> ): MutableSet<ImageAttribute> {
+        val attributes = mutableSetOf<ImageAttribute>()
+        metadata.getDirectoriesOfType( dirCls ).forEach {
+            it.tags.forEach { tag ->
+                attributes.add( ImageAttribute( name = tag.tagName, value = tag.description ) )
+        } }
         return attributes
     }
 }

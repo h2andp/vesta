@@ -39,4 +39,7 @@ dependencies {
     compile group: 'commons-io', name: 'commons-io', version: '2.5'
     compile group: 'com.google.guava', name: 'guava', version: '20.0'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
+    compile group: 'com.drewnoakes', name: 'metadata-extractor', version: '2.10.1'
+    compile group: 'javax.el', name: 'javax.el-api', version: '3.0.0'
+    compile group: 'jmimemagic', name: 'jmimemagic', version: '0.1.2'
 }

@@ -15,23 +15,23 @@ data class ImageAttribute (
          */
         @Id
         @GeneratedValue( strategy = AUTO )
-        var id: Long,
+        var id: Long? = null,
 
         /**
          * Name of the attribute.
          */
-        var name: String,
+        var name: String? = null,
 
         /**
          * Value of the attribute.
          */
-        var value: String,
+        var value: String? = null,
 
         /**
          * Instance of {@link Image} for which attribute attached.
          */
         @ManyToOne
         @JoinColumn( name = "image_id" )
-        var image: Image
+        var image: Image? = null
 
 )
