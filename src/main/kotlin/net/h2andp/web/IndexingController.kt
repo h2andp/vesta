@@ -23,7 +23,7 @@ class IndexingController(
      * Accepts index request and immediately start it.
      */
     @GetMapping( value = "/indexing/index" )
-    fun index():ResponseEntity<Void> {
+    fun index(): ResponseEntity<Void> {
         indexingService.index( config.indexing.path, config.indexing.recursive )
         return ResponseEntity.ok().build<Void>()
     }
