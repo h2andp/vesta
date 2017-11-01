@@ -14,17 +14,17 @@ data class ImageDuplicate(
          */
         @Id
         @GeneratedValue( strategy = GenerationType.AUTO)
-        var id: Long,
+        var id: Long?,
 
         /**
          * Path the image duplicate is located.
          */
-        var path: String,
+        var path: String?,
 
         /**
          * Instance of {@link Image} for which duplicate attached.
          */
         @ManyToOne
         @JoinColumn( name = "image_id" )
-        var image: Image
+        var image: Image?
 )

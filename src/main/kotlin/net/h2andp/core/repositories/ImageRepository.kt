@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
+import java.util.*
 
 /**
  * Talks to the collection of {@link Image} in database.
@@ -16,7 +17,7 @@ interface ImageRepository: JpaRepository<Image, Long> {
      * @param hash hash of image to search by.
      * @return nullable instance of {@link Image}.
      */
-    fun findByHash( hash: String ): Image?
+    fun findByHash( hash: String ): Optional<Image>
 
     /**
      * Find already classified instances of {@link Image}.

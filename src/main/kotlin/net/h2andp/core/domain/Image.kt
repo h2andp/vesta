@@ -16,7 +16,7 @@ data class Image (
          */
         @Id
         @GeneratedValue( strategy = AUTO )
-        var id: Long,
+        var id: Long?,
 
         /**
          * Path the image is located.
@@ -41,7 +41,7 @@ data class Image (
         /**
          * Any indexing errors.
          */
-        var error: String,
+        var error: String?,
 
         /**
          * Set of attached image attributes

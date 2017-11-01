@@ -36,5 +36,7 @@ dependencies {
     compile "org.hibernate:hibernate-entitymanager"
     compile "org.postgresql:postgresql"
     compile "org.liquibase:liquibase-core"
+    compile group: 'commons-io', name: 'commons-io', version: '2.5'
+    compile group: 'com.google.guava', name: 'guava', version: '20.0'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 }

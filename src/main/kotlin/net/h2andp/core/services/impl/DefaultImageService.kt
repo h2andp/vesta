@@ -1,6 +1,8 @@
 package net.h2andp.core.services.impl
 
 import net.h2andp.core.domain.Image
+import net.h2andp.core.domain.ImageClassification
+import net.h2andp.core.repositories.ImageClassificationRepository
 import net.h2andp.core.repositories.ImageRepository
 import net.h2andp.core.services.ImageService
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,7 +15,10 @@ import org.springframework.stereotype.Service
 @Service
 class DefaultImageService(
         @Autowired
-        val imageRepository: ImageRepository ) : ImageService {
+        val imageRepository: ImageRepository,
+
+        @Autowired
+        val imageClassificationRepository: ImageClassificationRepository ) : ImageService {
 
     override fun getAllClassified(): Collection<Image> = imageRepository.findClassified()
 
@@ -29,5 +34,8 @@ class DefaultImageService(
             cls, PageRequest( from, to )
     )
 
-    override fun getDetectedClasses(): Collection<String> = emptyList()
+    override fun getDetectedClasses(): Collection<String> = imageClassificationRepository
+            .findAll()
+            .map(ImageClassification::classes)
+            .toSet()
 }
